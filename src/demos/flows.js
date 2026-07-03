@@ -86,7 +86,7 @@ export const projects = [
         name: 'Cluster Builder',
         summary:
             'Model creation flow for cluster models — landing on Semantic vs. Text clustering on the Prepare Variables step.',
-        status: 'in-review',
+        status: 'iterating',
         lastUpdated: '2026-07-02',
         flows: [
             {
@@ -94,7 +94,7 @@ export const projects = [
                 title: 'Semantic clustering',
                 description:
                     'A new clustering approach for the Prepare Variables step that groups records by meaning instead of exact text — so near-duplicates and paraphrases fold into the same cluster. This prototype explores how it should surface alongside the existing Text clustering option.',
-                status: 'in-review',
+                status: 'iterating',
                 entry: 'https://sabarishks94.github.io/model-builder-flow-semantic-clustering/#/app/aim-cluster/builder?step=3&v=2',
             },
         ],
