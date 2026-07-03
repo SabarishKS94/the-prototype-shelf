@@ -8,12 +8,13 @@
         </header>
 
         <div class="projects">
-            <template for:each={projectGroups} for:item="project">
+            <template for:each={zones.active} for:item="project">
                 <section key={project.id} class="project">
                     <div class="project__meta">
                         <div class="project__label">Project</div>
                         <h2 class="project__name">{project.name}</h2>
                         <p class="project__summary">{project.summary}</p>
+                        <div class="project__updated">{project.updatedLabel}</div>
                     </div>
 
                     <ol class="flows">
@@ -34,14 +35,22 @@
                                             <span>Start demo</span>
                                             <span class="btn__arrow" aria-hidden="true">→</span>
                                         </a>
-                                        <a href={flow.fullUrl} class="btn btn_ghost" target="_blank" rel="noopener">Open full app</a>
                                         <button
                                             type="button"
-                                            class="btn btn_ghost btn_copy"
+                                            class="icon-btn"
                                             data-url={flow.absoluteGuidedUrl}
                                             onclick={handleCopy}
+                                            aria-label="Copy demo link"
+                                            title="Copy demo link"
                                         >
-                                            Copy demo link
+                                            <svg class="icon-btn__icon icon-btn__icon_copy" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                                <rect x="6.5" y="6.5" width="9" height="9" rx="1.75" stroke="currentColor" stroke-width="1.4"/>
+                                                <path d="M12.5 5.75V4.5A1.5 1.5 0 0 0 11 3H5.5A1.5 1.5 0 0 0 4 4.5V10a1.5 1.5 0 0 0 1.5 1.5h.75" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                                            </svg>
+                                            <svg class="icon-btn__icon icon-btn__icon_check" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                                <path d="M4.5 10.5L8 14l7.5-8" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <span class="icon-btn__tooltip" aria-hidden="true">Copy link</span>
                                         </button>
                                     </div>
                                 </div>
@@ -51,6 +60,84 @@
                 </section>
             </template>
         </div>
+
+        <template lwc:if={zones.hasArchive}>
+            <div class="archive">
+                <div class="archive__rail">
+                    <button
+                        type="button"
+                        class="archive__toggle"
+                        onclick={handleToggleArchive}
+                        aria-expanded={zones.showArchive}
+                    >
+                        <span class="archive__toggle-label">Archive</span>
+                        <span class="archive__toggle-count">{zones.archiveToggleLabel}</span>
+                        <span class="archive__toggle-chev" aria-hidden="true">
+                            <svg viewBox="0 0 12 12" fill="none">
+                                <path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="archive__rail-line"></div>
+                </div>
+
+                <template lwc:if={zones.showArchive}>
+                    <div class="projects projects_archive">
+                        <template for:each={zones.archive} for:item="project">
+                            <section key={project.id} class="project">
+                                <div class="project__meta">
+                                    <div class="project__label">Project</div>
+                                    <h2 class="project__name">{project.name}</h2>
+                                    <p class="project__summary">{project.summary}</p>
+                                    <div class="project__updated">{project.updatedLabel}</div>
+                                </div>
+
+                                <ol class="flows">
+                                    <template for:each={project.flows} for:item="flow">
+                                        <li key={flow.id} class="flow">
+                                            <div class="flow__num">{flow.indexLabel}</div>
+                                            <div class="flow__body">
+                                                <div class="flow__head">
+                                                    <h3 class="flow__title">{flow.title}</h3>
+                                                    <div class={flow.statusClass}>
+                                                        <span class="status__dot" aria-hidden="true"></span>
+                                                        <span>{flow.statusLabel}</span>
+                                                    </div>
+                                                </div>
+                                                <p class="flow__desc">{flow.description}</p>
+                                                <div class="flow__actions">
+                                                    <a href={flow.guidedUrl} class="btn btn_primary" target="_blank" rel="noopener">
+                                                        <span>Start demo</span>
+                                                        <span class="btn__arrow" aria-hidden="true">→</span>
+                                                    </a>
+                                                    <button
+                                                        type="button"
+                                                        class="icon-btn"
+                                                        data-url={flow.absoluteGuidedUrl}
+                                                        onclick={handleCopy}
+                                                        aria-label="Copy demo link"
+                                                        title="Copy demo link"
+                                                    >
+                                                        <svg class="icon-btn__icon icon-btn__icon_copy" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                                            <rect x="6.5" y="6.5" width="9" height="9" rx="1.75" stroke="currentColor" stroke-width="1.4"/>
+                                                            <path d="M12.5 5.75V4.5A1.5 1.5 0 0 0 11 3H5.5A1.5 1.5 0 0 0 4 4.5V10a1.5 1.5 0 0 0 1.5 1.5h.75" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                                                        </svg>
+                                                        <svg class="icon-btn__icon icon-btn__icon_check" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                                            <path d="M4.5 10.5L8 14l7.5-8" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                        <span class="icon-btn__tooltip" aria-hidden="true">Copy link</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ol>
+                            </section>
+                        </template>
+                    </div>
+                </template>
+            </div>
+        </template>
 
         <footer class="hub__footer">
             <span class="hub__footer-name">Sabarish K S</span>

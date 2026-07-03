@@ -5,10 +5,17 @@
  * to the guided-demo URL inside that project (with `?flow=<id>` appended).
  *
  * Project fields:
- *   id       — stable slug
- *   name     — display name
- *   summary  — one-line description
- *   flows    — array of guided demos
+ *   id           — stable slug
+ *   name         — display name
+ *   summary      — one-line description
+ *   status       — 'iterating' | 'in-review' | 'draft' | 'approved' | 'shipped'
+ *                  Drives which zone (Active vs. Archive) the project renders in.
+ *                  Active:  iterating, in-review, draft
+ *                  Archive: approved, shipped
+ *   lastUpdated  — ISO date (YYYY-MM-DD) of the most recent deploy or change.
+ *                  Used to sort projects newest-first within each zone and to
+ *                  render the "Updated Xd ago" label.
+ *   flows        — array of guided demos
  *
  * Flow fields:
  *   id           — matches the ?flow=<id> parameter the target repo listens for
@@ -27,6 +34,8 @@ export const projects = [
         id: 'nba',
         name: 'Next Best Action',
         summary: 'AI Models NBA card, stages, and settings.',
+        status: 'iterating',
+        lastUpdated: '2026-06-20',
         flows: [
             {
                 id: 'nba-card-lifecycle',
@@ -46,19 +55,40 @@ export const projects = [
             },
         ],
     },
-    // Add other projects here. Example:
-    // {
-    //     id: 'model-builder',
-    //     name: 'Model builder',
-    //     summary: 'Guided flow for creating and configuring models.',
-    //     flows: [
-    //         {
-    //             id: 'semantic-clustering',
-    //             title: 'Semantic clustering',
-    //             description: 'How users choose and configure the clustering step.',
-    //             status: 'in-review',
-    //             entry: 'https://model-builder.example.com/app/create',
-    //         },
-    //     ],
-    // },
+    {
+        id: 'cluster-builder-variable-settings',
+        name: 'Variable settings interaction',
+        summary:
+            'Exploring how per-variable transformation settings surface during model prep in the Cluster Builder.',
+        status: 'iterating',
+        lastUpdated: '2026-07-03',
+        flows: [
+            {
+                id: 'prepare-variables-settings',
+                title: 'Prepare Variables — settings interaction',
+                description:
+                    'A right-panel pattern for exposing transformation settings on Step 3 of the Cluster Builder, with an inline preview showing how each transformation will reshape the variable before training.',
+                status: 'iterating',
+                entry: 'https://sabarishks94.github.io/model-builder-flow-starter-kit/',
+            },
+        ],
+    },
+    {
+        id: 'cluster-builder-semantic',
+        name: 'Cluster Builder',
+        summary:
+            'Model creation flow for cluster models — landing on Semantic vs. Text clustering on the Prepare Variables step.',
+        status: 'in-review',
+        lastUpdated: '2026-07-02',
+        flows: [
+            {
+                id: 'semantic-clustering-prep',
+                title: 'Semantic clustering',
+                description:
+                    'A new clustering approach for the Prepare Variables step that groups records by meaning instead of exact text — so near-duplicates and paraphrases fold into the same cluster. This prototype explores how it should surface alongside the existing Text clustering option.',
+                status: 'in-review',
+                entry: 'https://sabarishks94.github.io/model-builder-flow-semantic-clustering/#/app/aim-cluster/builder?step=3&v=2',
+            },
+        ],
+    },
 ];

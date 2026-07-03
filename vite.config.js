@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => ({
                     dir: path.resolve('./src/modules'),
                 },
             ],
-            disableSyntheticShadowSupport: false,
+            disableSyntheticShadowSupport: true,
         }),
     ],
     appType: 'spa',
