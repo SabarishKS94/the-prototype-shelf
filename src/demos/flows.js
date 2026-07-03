@@ -38,20 +38,28 @@ export const projects = [
         lastUpdated: '2026-06-20',
         flows: [
             {
-                id: 'nba-card-lifecycle',
-                title: 'NBA card — lifecycle',
+                id: 'nba-card-states',
+                title: 'NBA card — state gallery',
                 description:
-                    'How the Next Best Action card appears on the model detail page and progresses through stages.',
-                status: 'iterating',
-                entry: 'http://localhost:4363/app/nba-model-detail', // TODO: replace with deployed URL
+                    'Cycle through every NBA card state — training, activation, inference setup, execution, monitoring — using the state picker in the prototype toolbar. Everything else on the page is locked so the focus stays on the card itself.',
+                status: 'delivered',
+                entry: 'http://localhost:4363/app/nba-model-detail',
             },
             {
-                id: 'settings-to-feature-manager',
+                id: 'nba-onboarding',
+                title: 'NBA — onboarding modes',
+                description:
+                    'Two onboarding paths side by side. Silent auto-enable drops the user straight into the just-enabled card with a kebab menu for refresh/disable. Auto-enable-with-consent surfaces a Continue/Disable pair, opens a terms modal, and only then reveals the training-in-progress card. Toggle between them from the toolbar.',
+                status: 'in-review',
+                entry: 'http://localhost:4363/app/nba-model-detail',
+            },
+            {
+                id: 'nba-settings',
                 title: 'Settings tab → Feature Manager',
                 description:
-                    'How the AI Models Settings tab surfaces the org-level Feature Manager entry point.',
-                status: 'draft',
-                entry: 'http://localhost:4363/app/nba-model-detail?tab=settings', // TODO
+                    'Where NBA and Drift Tracking live on the model\'s Settings tab: feature cards, expandable previews, and the callout that hands off to the org-level Feature Manager. Toggle the previews on and off from the toolbar; both the callout link and the Feature Manager nav item route to the same destination.',
+                status: 'in-review',
+                entry: 'http://localhost:4363/app/nba-model-detail?tab=settings',
             },
         ],
     },

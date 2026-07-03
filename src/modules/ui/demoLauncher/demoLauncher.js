@@ -99,6 +99,8 @@ export default class DemoLauncher extends LightningElement {
         switch (status) {
             case 'shipped':
                 return 'Shipped';
+            case 'delivered':
+                return 'Delivered';
             case 'approved':
                 return 'Approved';
             case 'iterating':

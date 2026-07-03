@@ -233,6 +233,15 @@
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 }
 
+.status_delivered {
+    background: rgba(14, 165, 164, 0.1);
+    color: #0e6d6c;
+}
+.status_delivered .status__dot {
+    background: #0ea5a4;
+    box-shadow: 0 0 0 3px rgba(14, 165, 164, 0.22);
+}
+
 .status_shipped {
     background: rgba(16, 185, 129, 0.1);
     color: #065f46;
