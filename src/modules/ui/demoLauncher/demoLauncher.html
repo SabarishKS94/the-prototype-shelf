@@ -1,0 +1,60 @@
+<template>
+    <div class="hub">
+        <header class="hub__header">
+            <h1 class="hub__title">The prototype shelf.</h1>
+            <p class="hub__lede">
+                A running index of live design prototypes. Each guided walkthrough opens the product with only the demoed elements active — everything else on the page is inert, so viewers stay on the intended path.
+            </p>
+        </header>
+
+        <div class="projects">
+            <template for:each={projectGroups} for:item="project">
+                <section key={project.id} class="project">
+                    <div class="project__meta">
+                        <div class="project__label">Project</div>
+                        <h2 class="project__name">{project.name}</h2>
+                        <p class="project__summary">{project.summary}</p>
+                    </div>
+
+                    <ol class="flows">
+                        <template for:each={project.flows} for:item="flow">
+                            <li key={flow.id} class="flow">
+                                <div class="flow__num">{flow.indexLabel}</div>
+                                <div class="flow__body">
+                                    <div class="flow__head">
+                                        <h3 class="flow__title">{flow.title}</h3>
+                                        <div class={flow.statusClass}>
+                                            <span class="status__dot" aria-hidden="true"></span>
+                                            <span>{flow.statusLabel}</span>
+                                        </div>
+                                    </div>
+                                    <p class="flow__desc">{flow.description}</p>
+                                    <div class="flow__actions">
+                                        <a href={flow.guidedUrl} class="btn btn_primary" target="_blank" rel="noopener">
+                                            <span>Start demo</span>
+                                            <span class="btn__arrow" aria-hidden="true">→</span>
+                                        </a>
+                                        <a href={flow.fullUrl} class="btn btn_ghost" target="_blank" rel="noopener">Open full app</a>
+                                        <button
+                                            type="button"
+                                            class="btn btn_ghost btn_copy"
+                                            data-url={flow.absoluteGuidedUrl}
+                                            onclick={handleCopy}
+                                        >
+                                            Copy demo link
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                        </template>
+                    </ol>
+                </section>
+            </template>
+        </div>
+
+        <footer class="hub__footer">
+            <span class="hub__footer-name">Sabarish K S</span>
+            <span class="hub__footer-meta">Updated {today}</span>
+        </footer>
+    </div>
+</template>
