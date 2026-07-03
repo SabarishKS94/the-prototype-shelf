@@ -64,6 +64,24 @@ export const projects = [
         ],
     },
     {
+        id: 'version-comparison',
+        name: 'Version Comparison',
+        summary:
+            'Post-training review flow for cluster models — comparing quality, structure, and operational metrics across versions to decide which one to activate.',
+        status: 'iterating',
+        lastUpdated: '2026-07-04',
+        flows: [
+            {
+                id: 'compare-model-versions',
+                title: 'Compare model versions',
+                description:
+                    'A side-by-side comparison of up to three trained cluster model versions. Surfaces overall score, quality & confidence metrics, structure & coverage, operational cost, and label + SHAP distributions — with a recommended winner called out at the top so reviewers can activate with confidence.',
+                status: 'iterating',
+                entry: 'https://sabarishks94.github.io/eou-version-comparison/app/compare-versions',
+            },
+        ],
+    },
+    {
         id: 'cluster-builder-variable-settings',
         name: 'Variable settings interaction',
         summary:
