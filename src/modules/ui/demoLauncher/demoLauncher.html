@@ -12,7 +12,17 @@
                 <section key={project.id} class="project">
                     <div class="project__meta">
                         <div class="project__label">Project</div>
-                        <h2 class="project__name">{project.name}</h2>
+                        <template lwc:if={project.hasDetail}>
+                            <h2 class="project__name">
+                                <a href={project.detailHref} class="project__link">
+                                    <span>{project.name}</span>
+                                    <span class="project__link-arrow" aria-hidden="true">→</span>
+                                </a>
+                            </h2>
+                        </template>
+                        <template lwc:else>
+                            <h2 class="project__name">{project.name}</h2>
+                        </template>
                         <p class="project__summary">{project.summary}</p>
                         <div class="project__updated">{project.updatedLabel}</div>
                     </div>

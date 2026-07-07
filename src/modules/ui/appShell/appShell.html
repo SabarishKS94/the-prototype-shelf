@@ -1,0 +1,8 @@
+<template>
+    <template lwc:if={showShelf}>
+        <ui-demo-launcher></ui-demo-launcher>
+    </template>
+    <template lwc:if={showDetail}>
+        <ui-project-detail project-id={projectId}></ui-project-detail>
+    </template>
+</template>

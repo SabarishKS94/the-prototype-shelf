@@ -1,0 +1,199 @@
+<template>
+    <div class="page">
+        <template lwc:if={notFound}>
+            <div class="empty">
+                <p class="empty__label">404</p>
+                <h1 class="empty__title">Project not found</h1>
+                <p class="empty__body">This project doesn't exist on the shelf, or its detail page hasn't been built yet.</p>
+                <button type="button" class="btn btn_ghost" onclick={handleBack}>← Back to the shelf</button>
+            </div>
+        </template>
+
+        <template lwc:else>
+            <button type="button" class="back" onclick={handleBack} aria-label="Back to the shelf">
+                <span class="back__arrow" aria-hidden="true">←</span>
+                <span>The prototype shelf</span>
+            </button>
+
+            <header class="header">
+                <div class="header__label">Project</div>
+                <div class="header__title-row">
+                    <h1 class="header__title">{project.name}</h1>
+                    <div class={projectStatusClass}>
+                        <span class="status__dot" aria-hidden="true"></span>
+                        <span>{projectStatusLabel}</span>
+                    </div>
+                </div>
+                <p class="header__subtitle">{subtitle}</p>
+            </header>
+
+            <nav class="tabs" role="tablist" aria-label="Project sections">
+                <template for:each={tabs} for:item="tab">
+                    <button
+                        key={tab.id}
+                        type="button"
+                        role="tab"
+                        class={tab.class}
+                        data-tab={tab.id}
+                        onclick={handleTab}
+                        aria-selected={tab.ariaSelected}
+                    >
+                        {tab.label}
+                    </button>
+                </template>
+            </nav>
+
+            <template lwc:if={showWalkthrough}>
+                <section class="section" aria-labelledby="walkthrough-heading">
+                    <template lwc:if={walkthroughIntro}>
+                        <p class="section__intro">{walkthroughIntro}</p>
+                    </template>
+                    <ol class="flows">
+                        <template for:each={walkthroughFlows} for:item="flow">
+                            <li key={flow.id} class="flow">
+                                <div class="flow__num">{flow.indexLabel}</div>
+                                <div class="flow__body">
+                                    <div class="flow__head">
+                                        <h3 class="flow__title">{flow.title}</h3>
+                                        <div class={flow.statusClass}>
+                                            <span class="status__dot" aria-hidden="true"></span>
+                                            <span>{flow.statusLabel}</span>
+                                        </div>
+                                    </div>
+                                    <p class="flow__desc">{flow.description}</p>
+                                    <div class="flow__actions">
+                                        <a href={flow.guidedUrl} class="btn btn_primary" target="_blank" rel="noopener">
+                                            <span>Start demo</span>
+                                            <span class="btn__arrow" aria-hidden="true">→</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        </template>
+                    </ol>
+                </section>
+            </template>
+
+            <template lwc:if={showEnhancements}>
+                <section class="section">
+                    <ol class="enhancements">
+                        <template for:each={enhancements} for:item="e">
+                            <li key={e.title} class="enhancement">
+                                <div class="enhancement__meta">
+                                    <div class="enhancement__label">{e.indexLabel}</div>
+                                    <h3 class="enhancement__title">{e.title}</h3>
+                                    <span class={e.priorityClass}>{e.priority}</span>
+                                    <p class="enhancement__desc">{e.description}</p>
+                                </div>
+                                <div class="enhancement__visuals">
+                                    <figure class="shot">
+                                        <div class="shot__label">Before</div>
+                                        <img src={e.before} alt="" class="shot__img" />
+                                    </figure>
+                                    <figure class="shot">
+                                        <div class="shot__label">After</div>
+                                        <img src={e.after} alt="" class="shot__img" />
+                                    </figure>
+                                </div>
+                            </li>
+                        </template>
+                    </ol>
+                </section>
+            </template>
+
+            <template lwc:if={showDesignSpecs}>
+                <section class="section">
+                    <ol class="specs">
+                        <template for:each={designSpecs} for:item="s">
+                            <li key={s.title} class="spec">
+                                <div class="spec__meta">
+                                    <h3 class="spec__title">{s.title}</h3>
+                                    <p class="spec__desc">{s.description}</p>
+                                </div>
+                                <figure class="spec__visual">
+                                    <img src={s.image} alt="" class="spec__img" />
+                                </figure>
+                            </li>
+                        </template>
+                    </ol>
+                </section>
+            </template>
+
+            <template lwc:if={showFindings}>
+                <section class="section">
+                    <template lwc:if={findingsPersonas.length}>
+                        <h3 class="section__heading">Personas</h3>
+                        <div class="personas">
+                            <template for:each={findingsPersonas} for:item="p">
+                                <article key={p.name} class="persona">
+                                    <h4 class="persona__name">{p.name}</h4>
+                                    <div class="persona__role">{p.role}</div>
+                                    <p class="persona__note">{p.note}</p>
+                                </article>
+                            </template>
+                        </div>
+                    </template>
+
+                    <div class="findings-grid">
+                        <template lwc:if={findingsAppreciated.length}>
+                            <div class="findings__block findings__block_good">
+                                <h3 class="findings__title">What users appreciated</h3>
+                                <ul class="findings__list">
+                                    <template for:each={findingsAppreciated} for:item="item">
+                                        <li key={item}>{item}</li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </template>
+                        <template lwc:if={findingsPain.length}>
+                            <div class="findings__block findings__block_bad">
+                                <h3 class="findings__title">Pain points & friction</h3>
+                                <ul class="findings__list">
+                                    <template for:each={findingsPain} for:item="item">
+                                        <li key={item}>{item}</li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </template>
+                    </div>
+                </section>
+            </template>
+
+            <template lwc:if={showImpact}>
+                <section class="section">
+                    <template lwc:if={impact.summary}>
+                        <p class="section__intro">{impact.summary}</p>
+                    </template>
+
+                    <template lwc:if={impactMetrics.length}>
+                        <div class="metrics">
+                            <div class="metrics__row metrics__row_head">
+                                <div>Metric</div>
+                                <div>Before</div>
+                                <div>After</div>
+                            </div>
+                            <template for:each={impactMetrics} for:item="m">
+                                <div key={m.label} class="metrics__row">
+                                    <div class="metrics__label">{m.label}</div>
+                                    <div class="metrics__before">{m.before}</div>
+                                    <div class="metrics__after">{m.after}</div>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+
+                    <template lwc:if={impactCategories.length}>
+                        <div class="categories">
+                            <template for:each={impactCategories} for:item="c">
+                                <article key={c.title} class="category">
+                                    <h4 class="category__title">{c.title}</h4>
+                                    <p class="category__desc">{c.description}</p>
+                                </article>
+                            </template>
+                        </div>
+                    </template>
+                </section>
+            </template>
+        </template>
+    </div>
+</template>

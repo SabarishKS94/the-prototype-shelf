@@ -1,5 +1,5 @@
 import { createElement } from 'lwc';
-import DemoLauncher from 'ui/demoLauncher';
+import AppShell from 'ui/appShell';
 
-const el = createElement('ui-demo-launcher', { is: DemoLauncher });
+const el = createElement('ui-app-shell', { is: AppShell });
 document.querySelector('#app').appendChild(el);

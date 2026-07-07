@@ -50,6 +50,8 @@ export default class DemoLauncher extends LightningElement {
         return withDates.map((p) => ({
             ...p,
             updatedLabel: this._relativeLabel(p.lastUpdated),
+            hasDetail: Boolean(p.detail),
+            detailHref: p.detail ? `#/project/${p.id}` : null,
             flows: p.flows.map((f) => {
                 flowCounter += 1;
                 const guidedUrl = this._appendFlow(f.entry, f.id);
