@@ -173,7 +173,7 @@ export default class ProjectDetail extends LightningElement {
             case 'iterating':
                 return 'Iterating';
             case 'in-review':
-                return 'In review';
+                return 'Need review';
             case 'draft':
             default:
                 return 'Draft';

@@ -7,6 +7,32 @@
             </p>
         </header>
 
+        <div class="filters" role="toolbar" aria-label="Filter flows by status">
+            <span class="filters__label">Filter</span>
+            <template for:each={filters} for:item="f">
+                <button
+                    key={f.id}
+                    type="button"
+                    class={f.class}
+                    data-filter={f.id}
+                    onclick={handleFilter}
+                    aria-pressed={f.ariaPressed}
+                    disabled={f.disabled}
+                >
+                    <span class="filter__dot" aria-hidden="true"></span>
+                    <span class="filter__label">{f.label}</span>
+                    <span class="filter__count">{f.count}</span>
+                </button>
+            </template>
+        </div>
+
+        <template lwc:if={zones.filterActive}>
+            <template lwc:if={zones.hasActive}></template>
+            <template lwc:else>
+                <p class="empty-state">{zones.emptyLabel}</p>
+            </template>
+        </template>
+
         <div class="projects">
             <template for:each={zones.active} for:item="project">
                 <section key={project.id} class="project">

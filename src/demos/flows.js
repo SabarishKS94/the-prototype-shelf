@@ -161,7 +161,8 @@ export const projects = [
                 description:
                     'Cycle through every NBA card state — training, activation, inference setup, execution, monitoring — using the state picker in the prototype toolbar. Everything else on the page is locked so the focus stays on the card itself.',
                 status: 'delivered',
-                entry: 'http://localhost:4363/app/nba-model-detail',
+                entry: 'https://sabarishks94.github.io/next-best-action-nba/#/app/nba-model-detail',
+                localEntry: 'http://localhost:4363/app/nba-model-detail',
             },
             {
                 id: 'nba-onboarding',
@@ -169,7 +170,8 @@ export const projects = [
                 description:
                     'Two onboarding paths side by side. Silent auto-enable drops the user straight into the just-enabled card with a kebab menu for refresh/disable. Auto-enable-with-consent surfaces a Continue/Disable pair, opens a terms modal, and only then reveals the training-in-progress card. Toggle between them from the toolbar.',
                 status: 'in-review',
-                entry: 'http://localhost:4363/app/nba-model-detail',
+                entry: 'https://sabarishks94.github.io/next-best-action-nba/#/app/nba-model-detail',
+                localEntry: 'http://localhost:4363/app/nba-model-detail',
             },
             {
                 id: 'nba-settings',
@@ -177,7 +179,8 @@ export const projects = [
                 description:
                     'Where NBA and Drift Tracking live on the model\'s Settings tab: feature cards, expandable previews, and the callout that hands off to the org-level Feature Manager. Toggle the previews on and off from the toolbar; both the callout link and the Feature Manager nav item route to the same destination.',
                 status: 'in-review',
-                entry: 'http://localhost:4363/app/nba-model-detail?tab=settings',
+                entry: 'https://sabarishks94.github.io/next-best-action-nba/?tab=settings#/app/nba-model-detail',
+                localEntry: 'http://localhost:4363/app/nba-model-detail?tab=settings',
             },
         ],
     },
@@ -204,16 +207,34 @@ export const projects = [
         name: 'Variable settings interaction',
         summary:
             'Exploring how per-variable transformation settings surface during model prep in the Cluster Builder.',
-        status: 'iterating',
-        lastUpdated: '2026-07-03',
+        status: 'in-review',
+        lastUpdated: '2026-07-08',
         flows: [
             {
                 id: 'prepare-variables-settings',
                 title: 'Prepare Variables — settings interaction',
                 description:
                     'A right-panel pattern for exposing transformation settings on Step 3 of the Cluster Builder, with an inline preview showing how each transformation will reshape the variable before training.',
-                status: 'iterating',
+                status: 'in-review',
                 entry: 'https://sabarishks94.github.io/model-builder-flow-starter-kit/',
+            },
+        ],
+    },
+    {
+        id: 'model-training-in-progress',
+        name: 'Model Training in Progress',
+        summary:
+            'A redesigned in-flight state for cluster model training — surfacing pipeline stage, start time, and expected finish so users can leave the page with confidence.',
+        status: 'in-review',
+        lastUpdated: '2026-07-08',
+        flows: [
+            {
+                id: 'training-in-progress',
+                title: 'Training in progress — status view',
+                description:
+                    'A redesigned in-flight state for cluster model training. Turns the empty "training…" screen into a clear status view — showing which stage the pipeline is in, when it started, and when it should finish — so users can leave the page with confidence instead of hovering over a spinner.',
+                status: 'in-review',
+                entry: 'https://sabarishks94.github.io/model-builder-flow-starter-training-in-progress-screen/',
             },
         ],
     },

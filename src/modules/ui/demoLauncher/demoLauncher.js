@@ -2,28 +2,72 @@ import { LightningElement, track } from 'lwc';
 import { projects } from '../../../demos/flows.js';
 
 const ARCHIVE_STATUSES = new Set(['approved', 'shipped']);
+const FILTER_STATUSES = ['in-review', 'iterating', 'delivered', 'draft'];
+const VALID_FILTERS = new Set(['all', ...FILTER_STATUSES]);
 
 export default class DemoLauncher extends LightningElement {
     @track showArchive = false;
+    @track filterStatus = 'all';
+
+    connectedCallback() {
+        try {
+            const params = new URLSearchParams(window.location.search);
+            const f = params.get('filter');
+            if (f && VALID_FILTERS.has(f)) {
+                this.filterStatus = f;
+            }
+        } catch {
+            /* no-op */
+        }
+    }
 
     get zones() {
         const decorated = this._decorateProjects();
-        const active = decorated.filter(
+        const filtered = this._applyFilter(decorated);
+        const filterActive = this.filterStatus !== 'all';
+        const active = filtered.filter(
             (p) => !ARCHIVE_STATUSES.has(p.projectStatus)
         );
-        const archive = decorated.filter((p) =>
+        const archive = filtered.filter((p) =>
             ARCHIVE_STATUSES.has(p.projectStatus)
         );
         return {
             active,
             archive,
-            hasArchive: archive.length > 0,
+            hasArchive: archive.length > 0 && !filterActive,
             archiveCount: archive.length,
             archiveToggleLabel: this.showArchive
                 ? `Hide ${archive.length} archived`
                 : `Show ${archive.length} archived`,
             showArchive: this.showArchive,
+            hasActive: active.length > 0,
+            filterActive,
+            emptyLabel: this._emptyLabel(),
         };
+    }
+
+    get filters() {
+        const counts = this._flowCountsByStatus();
+        const total = Object.values(counts).reduce((a, b) => a + b, 0);
+        const items = [
+            { id: 'all', label: 'All', count: total },
+            ...FILTER_STATUSES.map((s) => ({
+                id: s,
+                label: this._statusLabel(s),
+                count: counts[s] ?? 0,
+            })),
+        ];
+        return items.map((f) => {
+            const active = this.filterStatus === f.id;
+            return {
+                ...f,
+                class: active
+                    ? `filter filter_${f.id} is-active`
+                    : `filter filter_${f.id}`,
+                ariaPressed: String(active),
+                disabled: f.count === 0 && f.id !== 'all',
+            };
+        });
     }
 
     get today() {
@@ -38,6 +82,50 @@ export default class DemoLauncher extends LightningElement {
     handleToggleArchive = () => {
         this.showArchive = !this.showArchive;
     };
+
+    handleFilter = (event) => {
+        const id = event.currentTarget?.dataset?.filter;
+        if (!id) return;
+        this.filterStatus = id;
+        try {
+            const url = new URL(window.location.href);
+            if (id === 'all') {
+                url.searchParams.delete('filter');
+            } else {
+                url.searchParams.set('filter', id);
+            }
+            window.history.replaceState({}, '', url.toString());
+        } catch {
+            /* no-op */
+        }
+    };
+
+    _applyFilter(decorated) {
+        if (this.filterStatus === 'all') return decorated;
+        return decorated
+            .map((p) => ({
+                ...p,
+                flows: p.flows.filter((f) => f.status === this.filterStatus),
+            }))
+            .filter((p) => p.flows.length > 0);
+    }
+
+    _flowCountsByStatus() {
+        const counts = {};
+        for (const p of projects) {
+            for (const f of p.flows) {
+                const s = f.status ?? 'draft';
+                counts[s] = (counts[s] ?? 0) + 1;
+            }
+        }
+        return counts;
+    }
+
+    _emptyLabel() {
+        if (this.filterStatus === 'all') return '';
+        const label = this._statusLabel(this.filterStatus);
+        return `No flows are currently ${label.toLowerCase()}.`;
+    }
 
     _decorateProjects() {
         let flowCounter = 0;
@@ -55,12 +143,17 @@ export default class DemoLauncher extends LightningElement {
             flows: p.flows.map((f) => {
                 flowCounter += 1;
                 const guidedUrl = this._appendFlow(f.entry, f.id);
+                const localGuidedUrl = f.localEntry
+                    ? this._appendFlow(f.localEntry, f.id)
+                    : null;
                 const status = f.status ?? 'draft';
                 return {
                     ...f,
                     indexLabel: String(flowCounter).padStart(2, '0'),
                     guidedUrl,
                     absoluteGuidedUrl: guidedUrl,
+                    localGuidedUrl,
+                    hasLocalEntry: Boolean(localGuidedUrl),
                     statusLabel: this._statusLabel(status),
                     statusClass: `status status_${status}`,
                 };
@@ -108,7 +201,7 @@ export default class DemoLauncher extends LightningElement {
             case 'iterating':
                 return 'Iterating';
             case 'in-review':
-                return 'In review';
+                return 'Need review';
             case 'draft':
             default:
                 return 'Draft';
