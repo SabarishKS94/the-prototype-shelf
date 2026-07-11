@@ -216,7 +216,7 @@ export const projects = [
                 description:
                     'A right-panel pattern for exposing transformation settings on Step 3 of the Cluster Builder, with an inline preview showing how each transformation will reshape the variable before training.',
                 status: 'in-review',
-                entry: 'https://sabarishks94.github.io/model-builder-flow-starter-kit/',
+                entry: 'https://sabarishks94.github.io/model-builder-flow-settings-interaction/#/aim-cluster/builder?step=3&mode=shelf',
             },
         ],
     },
@@ -243,16 +243,16 @@ export const projects = [
         name: 'Cluster Builder',
         summary:
             'Model creation flow for cluster models — landing on Semantic vs. Text clustering on the Prepare Variables step.',
-        status: 'iterating',
-        lastUpdated: '2026-07-02',
+        status: 'in-review',
+        lastUpdated: '2026-07-11',
         flows: [
             {
                 id: 'semantic-clustering-prep',
                 title: 'Semantic clustering',
                 description:
                     'A new clustering approach for the Prepare Variables step that groups records by meaning instead of exact text — so near-duplicates and paraphrases fold into the same cluster. This prototype explores how it should surface alongside the existing Text clustering option.',
-                status: 'iterating',
-                entry: 'https://sabarishks94.github.io/model-builder-flow-semantic-clustering/#/app/aim-cluster/builder?step=3&v=2',
+                status: 'in-review',
+                entry: 'https://sabarishks94.github.io/model-builder-flow-semantic-clustering/#/app/aim-cluster/builder?step=3&mode=shelf',
             },
         ],
     },
