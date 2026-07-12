@@ -49,6 +49,24 @@
 
 export const projects = [
     {
+        id: 'segment-builder',
+        name: 'Segment Builder',
+        summary:
+            'Prototype variants for surfacing predictive AI attributes inside the Data Cloud segment builder — from grouped panels to natural-language prompts.',
+        status: 'in-review',
+        lastUpdated: '2026-07-11',
+        flows: [
+            {
+                id: 'ai-models-in-segments',
+                title: 'AI models in segments',
+                description:
+                    'A design exploration for bringing predictive AI attributes — like churn risk, lifetime value, and product affinity — into the Data Cloud segment builder. The prototype tests how marketers should discover, evaluate, and combine ML-powered fields alongside standard attributes when building an audience.',
+                status: 'in-review',
+                entry: 'https://sabarishks94.github.io/ai-models-in-segments/#/app/segment-builder',
+            },
+        ],
+    },
+    {
         id: 'nba',
         name: 'Next Best Action',
         summary: 'AI Models NBA card, stages, and settings.',
@@ -242,15 +260,15 @@ export const projects = [
         id: 'cluster-builder-semantic',
         name: 'Cluster Builder',
         summary:
-            'Model creation flow for cluster models — landing on Semantic vs. Text clustering on the Prepare Variables step.',
+            'Model creation flow for cluster models — landing on Semantic grouping vs. Text clustering on the Prepare Variables step.',
         status: 'in-review',
         lastUpdated: '2026-07-11',
         flows: [
             {
                 id: 'semantic-clustering-prep',
-                title: 'Semantic clustering',
+                title: 'Semantic grouping',
                 description:
-                    'A new clustering approach for the Prepare Variables step that groups records by meaning instead of exact text — so near-duplicates and paraphrases fold into the same cluster. This prototype explores how it should surface alongside the existing Text clustering option.',
+                    'A new grouping approach for the Prepare Variables step that groups records by meaning instead of exact text — so near-duplicates and paraphrases fold into the same group. This prototype explores how it should surface alongside the existing Text clustering option.',
                 status: 'in-review',
                 entry: 'https://sabarishks94.github.io/model-builder-flow-semantic-clustering/#/app/aim-cluster/builder?step=3&mode=shelf',
             },
