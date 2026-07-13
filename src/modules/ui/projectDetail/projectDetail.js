@@ -1,6 +1,15 @@
 import { LightningElement, api, track } from 'lwc';
 import { projects } from '../../../demos/flows.js';
 
+const BASE_URL = (import.meta.env?.BASE_URL ?? '/').replace(/\/$/, '/');
+
+function resolveAsset(path) {
+    if (!path) return path;
+    if (/^(?:https?:)?\/\//.test(path)) return path;
+    const clean = path.replace(/^\/+/, '');
+    return `${BASE_URL}${clean}`;
+}
+
 export default class ProjectDetail extends LightningElement {
     @api projectId;
     @track activeTab = '';
@@ -82,6 +91,7 @@ export default class ProjectDetail extends LightningElement {
                 priorityClass: `priority priority_${(e.priority ?? '').toLowerCase()}`,
                 visuals: visuals.map((v, vi) => ({
                     ...v,
+                    image: resolveAsset(v.image),
                     _key: `${i}-${vi}`,
                 })),
             };
@@ -96,7 +106,8 @@ export default class ProjectDetail extends LightningElement {
     }
 
     get designSpecs() {
-        return this.project?.detail?.designSpecs ?? [];
+        const specs = this.project?.detail?.designSpecs ?? [];
+        return specs.map((s) => ({ ...s, image: resolveAsset(s.image) }));
     }
 
     get findings() {
