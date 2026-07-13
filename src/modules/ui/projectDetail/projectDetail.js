@@ -85,10 +85,25 @@ export default class ProjectDetail extends LightningElement {
             const visuals = Array.isArray(e.visuals) && e.visuals.length
                 ? e.visuals
                 : this._legacyBeforeAfter(e);
+            const anatomy = e.anatomy
+                ? {
+                      ...e.anatomy,
+                      parts: (e.anatomy.parts ?? []).map((p, pi) => ({
+                          ...p,
+                          _key: `${i}-a-${pi}`,
+                          indexLabel: String(pi + 1).padStart(2, '0'),
+                          tagClass: p.tag
+                              ? `anatomy__tag anatomy__tag_${p.tag.toLowerCase()}`
+                              : 'anatomy__tag',
+                      })),
+                  }
+                : null;
             return {
                 ...e,
                 indexLabel: `Enhancement · Priority ${i + 1}`,
                 priorityClass: `priority priority_${(e.priority ?? '').toLowerCase()}`,
+                hasAnatomy: Boolean(anatomy && anatomy.parts.length),
+                anatomy,
                 visuals: visuals.map((v, vi) => ({
                     ...v,
                     image: resolveAsset(v.image),

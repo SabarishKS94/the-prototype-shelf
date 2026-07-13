@@ -94,6 +94,32 @@
                                             </template>
                                         </figure>
                                     </template>
+                                    <template lwc:if={e.hasAnatomy}>
+                                        <div class="anatomy">
+                                            <div class="anatomy__head">
+                                                <div class="anatomy__label">Anatomy</div>
+                                                <template lwc:if={e.anatomy.intro}>
+                                                    <p class="anatomy__intro">{e.anatomy.intro}</p>
+                                                </template>
+                                            </div>
+                                            <ol class="anatomy__list">
+                                                <template for:each={e.anatomy.parts} for:item="p">
+                                                    <li key={p._key} class="anatomy__part">
+                                                        <div class="anatomy__num">{p.indexLabel}</div>
+                                                        <div class="anatomy__body">
+                                                            <div class="anatomy__row">
+                                                                <h4 class="anatomy__title">{p.title}</h4>
+                                                                <template lwc:if={p.tag}>
+                                                                    <span class={p.tagClass}>{p.tag}</span>
+                                                                </template>
+                                                            </div>
+                                                            <p class="anatomy__desc">{p.description}</p>
+                                                        </div>
+                                                    </li>
+                                                </template>
+                                            </ol>
+                                        </div>
+                                    </template>
                                 </div>
                             </li>
                         </template>

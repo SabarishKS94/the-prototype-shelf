@@ -447,6 +447,130 @@
     max-width: 34rem;
 }
 
+/* ── Anatomy block (inline breakdown inside an enhancement) ── */
+.anatomy {
+    margin-top: 0.5rem;
+    padding: 1.5rem;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.anatomy__head {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.anatomy__label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+}
+
+.anatomy__intro {
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--ink-2);
+    margin: 0;
+    max-width: 36rem;
+}
+
+.anatomy__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.anatomy__part {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 0.85rem;
+    padding: 0.875rem 0;
+    border-top: 1px solid var(--line);
+    align-items: start;
+}
+
+.anatomy__part:first-child {
+    border-top: none;
+    padding-top: 0;
+}
+
+.anatomy__part:last-child {
+    padding-bottom: 0;
+}
+
+.anatomy__num {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-dim);
+    font-feature-settings: 'tnum';
+    padding-top: 0.15rem;
+}
+
+.anatomy__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-width: 0;
+}
+
+.anatomy__row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.anatomy__title {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+    margin: 0;
+}
+
+.anatomy__tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    font-weight: 500;
+    line-height: 1;
+    background: rgba(10, 10, 10, 0.05);
+    color: var(--ink-muted);
+}
+
+.anatomy__tag_new {
+    background: rgba(16, 185, 129, 0.1);
+    color: #065f46;
+}
+
+.anatomy__tag_existing {
+    background: rgba(10, 10, 10, 0.05);
+    color: var(--ink-muted);
+}
+
+.anatomy__desc {
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    margin: 0;
+    max-width: 38rem;
+}
+
 /* ── Design specs ── */
 .specs {
     list-style: none;

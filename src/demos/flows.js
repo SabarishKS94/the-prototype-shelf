@@ -246,6 +246,42 @@ export const projects = [
                             caption: 'Step 3 loads with the panel already open and the first variable selected.',
                         },
                     ],
+                    anatomy: {
+                        intro:
+                            'The panel is a stack of five sections, ordered by how often each one is touched during a tuning pass — variable-level context first, then the transformation controls, then the reference data.',
+                        parts: [
+                            {
+                                title: 'Variable selector',
+                                description:
+                                    'New dropdown at the top. Shows the current variable and lets users jump to any other variable without going back to the list.',
+                                tag: 'New',
+                            },
+                            {
+                                title: 'Settings / Alerts tabs',
+                                description:
+                                    'Segments transformation config from alert thresholds. Settings is the default entry point.',
+                                tag: 'Existing',
+                            },
+                            {
+                                title: 'Transformation',
+                                description:
+                                    'The core control. Options are type-aware — the list of transformations changes based on whether the variable is number, text, or date.',
+                                tag: 'Existing',
+                            },
+                            {
+                                title: 'Sample outcome',
+                                description:
+                                    'New Before/After preview that reflects the selected transformation. Updates live as the transformation changes.',
+                                tag: 'New',
+                            },
+                            {
+                                title: 'Distribution',
+                                description:
+                                    'Read-only reference — min/max for numbers, category counts for text, date range for dates.',
+                                tag: 'Existing',
+                            },
+                        ],
+                    },
                 },
                 {
                     priority: 'Critical',
@@ -266,6 +302,42 @@ export const projects = [
                             caption: 'Search — filters the list as you type, keeping the current selection at the top.',
                         },
                     ],
+                    anatomy: {
+                        intro:
+                            'A single control with three states. Same trigger, same overlay — the search input is always present so users can filter without a mode switch.',
+                        parts: [
+                            {
+                                title: 'VARIABLE label',
+                                description:
+                                    'Small caps label above the trigger so the dropdown is scannable inside the busy panel — matches the existing labeling pattern in the rest of the settings panel.',
+                                tag: 'New',
+                            },
+                            {
+                                title: 'Trigger (collapsed)',
+                                description:
+                                    'Full-width button showing the currently selected variable name and a chevron. Acts as the anchor for the overlay.',
+                                tag: 'New',
+                            },
+                            {
+                                title: 'Search input',
+                                description:
+                                    'Focused by default when the overlay opens. Filters the list live as the user types; a clear button resets to the full list.',
+                                tag: 'New',
+                            },
+                            {
+                                title: 'Current selection',
+                                description:
+                                    'The variable already in the panel is highlighted at the top of the list — persists across search so users never lose their place.',
+                                tag: 'New',
+                            },
+                            {
+                                title: 'Result list',
+                                description:
+                                    'Same variable order as the left-hand table. Click a row to switch the panel context; overlay closes on selection.',
+                                tag: 'New',
+                            },
+                        ],
+                    },
                 },
                 {
                     priority: 'High',
@@ -290,6 +362,42 @@ export const projects = [
                             caption: 'Date · Group by month — the same variable grouped at a coarser cadence.',
                         },
                     ],
+                    anatomy: {
+                        intro:
+                            'A shared frame with type-specific content. The layout and labels are identical across variable types so the pattern is learnable in one look; only the preview data and the explanatory copy change.',
+                        parts: [
+                            {
+                                title: 'Section heading + explainer',
+                                description:
+                                    '"Sample outcome" title with a one-line explainer — "How the model will see this variable after training." Sets the frame so users read the preview as model behaviour, not raw data.',
+                                tag: 'New',
+                            },
+                            {
+                                title: 'Before card',
+                                description:
+                                    'Shows the current state of the variable — the distribution the model would see with no transformation. Uses the neutral blue bar palette from the existing chart system.',
+                                tag: 'New',
+                            },
+                            {
+                                title: 'After card',
+                                description:
+                                    'Shows the same variable after the selected transformation is applied. Updates live when the transformation dropdown changes; changed bars are highlighted in green so the delta is obvious.',
+                                tag: 'New',
+                            },
+                            {
+                                title: 'Card caption',
+                                description:
+                                    'Plain-language caption under each chart in place of axis labels. Type-specific — imputation copy for numbers, clustering copy for text, grouping copy for dates.',
+                                tag: 'New',
+                            },
+                            {
+                                title: 'Type-aware content',
+                                description:
+                                    'The chart, caption, and copy adapt to the variable type: number (missing-row imputation), text (free-text → categories), date (raw → grouped by day or month). Same anatomy every time.',
+                                tag: 'New',
+                            },
+                        ],
+                    },
                 },
             ],
             impact: {
