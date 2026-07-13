@@ -227,6 +227,99 @@ export const projects = [
             'Exploring how per-variable transformation settings surface during model prep in the Cluster Builder.',
         status: 'in-review',
         lastUpdated: '2026-07-08',
+        detail: {
+            subtitle:
+                'A refresh of the Prepare Variables step in the Cluster Builder. The settings panel opens by default with the first variable selected, adds a searchable variable selector at the top, and shows a type-specific sample outcome so users understand each transformation before applying it.',
+            walkthrough: {
+                intro:
+                    'The prototype lands on Step 3 of the Cluster Builder with the settings panel already open on the right — first variable pre-selected. Use the variable dropdown at the top of the panel to jump between variables, or click any row on the left to swap in place. Switching the transformation updates the Sample outcome preview live, so you can see how the model will see the variable after training.',
+            },
+            enhancements: [
+                {
+                    priority: 'Critical',
+                    title: 'Right panel open by default',
+                    description:
+                        'The transformation settings panel is docked and open the moment you land on Step 3, with the first variable pre-selected. No modal to trigger, no empty state to interpret — the settings context is visible immediately, and users can start tuning without a first click.',
+                    visuals: [
+                        {
+                            image: '/projects/variable-settings/enh-1-panel-open.png',
+                            caption: 'Step 3 loads with the panel already open and the first variable selected.',
+                        },
+                    ],
+                },
+                {
+                    priority: 'Critical',
+                    title: 'Searchable variable selector inside the panel',
+                    description:
+                        'A new dropdown at the top of the panel shows which variable is currently selected and lets you jump to any other variable in one interaction — with search for long lists. The existing pattern of clicking a variable row to open its settings still works; the two entry points coexist so users can navigate whichever way feels faster.',
+                    visuals: [
+                        {
+                            image: '/projects/variable-settings/enh-2-selector-collapsed.png',
+                            caption: 'Collapsed — always shows the current variable in context.',
+                        },
+                        {
+                            image: '/projects/variable-settings/enh-2-selector-open.png',
+                            caption: 'Expanded — the full variable list, ordered as it appears on the left.',
+                        },
+                        {
+                            image: '/projects/variable-settings/enh-2-selector-search.png',
+                            caption: 'Search — filters the list as you type, keeping the current selection at the top.',
+                        },
+                    ],
+                },
+                {
+                    priority: 'High',
+                    title: 'Sample outcome preview per variable type',
+                    description:
+                        'Every transformation now shows a type-aware Before/After preview so users understand the impact upfront — no need to train the model just to see what the reshape looks like. Numbers show missing-row imputation, text shows free-text clustered into categories, and dates show grouping options like by day or by month.',
+                    visuals: [
+                        {
+                            image: '/projects/variable-settings/enh-3-number.png',
+                            caption: 'Number — missing rows filled with a sensible default instead of dropped.',
+                        },
+                        {
+                            image: '/projects/variable-settings/enh-3-text.png',
+                            caption: 'Text — free-text responses clustered into a small set of categories.',
+                        },
+                        {
+                            image: '/projects/variable-settings/enh-3-date-day.png',
+                            caption: 'Date · Group by day — thousands of unique dates collapsed onto a day-level distribution.',
+                        },
+                        {
+                            image: '/projects/variable-settings/enh-3-date-month.png',
+                            caption: 'Date · Group by month — the same variable grouped at a coarser cadence.',
+                        },
+                    ],
+                },
+            ],
+            impact: {
+                summary:
+                    'Together, these three changes remove the guesswork from the Prepare Variables step. Users no longer have to open, tune, apply, and retrain just to see what a transformation does — the outcome is visible up front, and switching between variables takes one interaction inside the panel.',
+                metrics: [
+                    { label: 'Panel state on landing', before: 'Closed', after: 'Open, first variable selected' },
+                    { label: 'Jump to another variable', before: 'Back to list, click row', after: 'Dropdown in panel' },
+                    { label: 'Preview reshape pre-commit', before: 'None', after: 'Per-type preview' },
+                    { label: 'Variable-type awareness', before: 'Generic', after: 'Number · Text · Date' },
+                ],
+                categories: [
+                    {
+                        title: 'Reduced cognitive load',
+                        description:
+                            'The panel starts in the state most users want it in — open, with a variable selected. Nothing to discover.',
+                    },
+                    {
+                        title: 'Faster navigation',
+                        description:
+                            'The in-panel dropdown removes the back-and-forth between the variable list and the settings, especially for models with many variables.',
+                    },
+                    {
+                        title: 'Confidence before commit',
+                        description:
+                            'The type-specific Sample outcome lets users evaluate a transformation with their own eyes instead of running a train cycle to check.',
+                    },
+                ],
+            },
+        },
         flows: [
             {
                 id: 'prepare-variables-settings',

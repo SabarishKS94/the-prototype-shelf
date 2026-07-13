@@ -72,11 +72,27 @@ export default class ProjectDetail extends LightningElement {
 
     get enhancements() {
         const items = this.project?.detail?.enhancements ?? [];
-        return items.map((e, i) => ({
-            ...e,
-            indexLabel: `Enhancement · Priority ${i + 1}`,
-            priorityClass: `priority priority_${(e.priority ?? '').toLowerCase()}`,
-        }));
+        return items.map((e, i) => {
+            const visuals = Array.isArray(e.visuals) && e.visuals.length
+                ? e.visuals
+                : this._legacyBeforeAfter(e);
+            return {
+                ...e,
+                indexLabel: `Enhancement · Priority ${i + 1}`,
+                priorityClass: `priority priority_${(e.priority ?? '').toLowerCase()}`,
+                visuals: visuals.map((v, vi) => ({
+                    ...v,
+                    _key: `${i}-${vi}`,
+                })),
+            };
+        });
+    }
+
+    _legacyBeforeAfter(e) {
+        const out = [];
+        if (e.before) out.push({ image: e.before, caption: 'Before' });
+        if (e.after) out.push({ image: e.after, caption: 'After' });
+        return out;
     }
 
     get designSpecs() {

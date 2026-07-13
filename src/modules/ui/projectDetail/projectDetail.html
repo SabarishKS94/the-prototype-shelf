@@ -86,14 +86,14 @@
                                     <p class="enhancement__desc">{e.description}</p>
                                 </div>
                                 <div class="enhancement__visuals">
-                                    <figure class="shot">
-                                        <div class="shot__label">Before</div>
-                                        <img src={e.before} alt="" class="shot__img" />
-                                    </figure>
-                                    <figure class="shot">
-                                        <div class="shot__label">After</div>
-                                        <img src={e.after} alt="" class="shot__img" />
-                                    </figure>
+                                    <template for:each={e.visuals} for:item="v">
+                                        <figure key={v._key} class="shot">
+                                            <img src={v.image} alt="" class="shot__img" />
+                                            <template lwc:if={v.caption}>
+                                                <figcaption class="shot__caption">{v.caption}</figcaption>
+                                            </template>
+                                        </figure>
+                                    </template>
                                 </div>
                             </li>
                         </template>
