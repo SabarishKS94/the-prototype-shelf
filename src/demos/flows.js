@@ -227,6 +227,8 @@ export const projects = [
             'Exploring how per-variable transformation settings surface during model prep in the Cluster Builder.',
         status: 'in-review',
         lastUpdated: '2026-07-08',
+        sourceUrl:
+            'https://github.com/SabarishKS94/model-builder-flow-settings-interaction',
         detail: {
             subtitle:
                 'A refresh of the Prepare Variables step in the Cluster Builder. The settings panel opens by default with the first variable selected, adds a searchable variable selector at the top, and shows a type-specific sample outcome so users understand each transformation before applying it.',
@@ -459,11 +461,311 @@ export const projects = [
     },
     {
         id: 'cluster-builder-semantic',
-        name: 'Cluster Builder',
+        name: 'Semantic grouping — Cluster Builder',
         summary:
             'Model creation flow for cluster models — landing on Semantic grouping vs. Text clustering on the Prepare Variables step.',
         status: 'in-review',
-        lastUpdated: '2026-07-11',
+        lastUpdated: '2026-07-16',
+        sourceUrl:
+            'https://github.com/SabarishKS94/model-builder-flow-semantic-clustering',
+        detail: {
+            subtitle:
+                'A new transformation for long-text variables on the Prepare Variables step. Text clustering breaks down on free-form fields like descriptions or notes because it matches on exact patterns — Semantic grouping folds near-duplicates and paraphrases into the same group by understanding meaning, so long-text variables become usable in a cluster model.',
+            walkthrough: {
+                intro:
+                    'The prototype lands on Step 3 of the Cluster Builder with Semantic grouping already enabled and auto-applied to the most relevant long-text variables. Toggle the Use semantic grouping card at the top to compare before/after, hover the info icon on any disabled long-text row to see the limit message, or open the Transformation dropdown on a long-text variable to switch between None and Semantic Grouping.',
+            },
+            enhancements: [
+                {
+                    title: 'Enable semantic transformation card',
+                    priority: 'critical',
+                    description:
+                        'A new card at the top of Prepare Variables that turns Semantic grouping on for the whole model. When enabled, it auto-applies the transformation to the most relevant long-text variables (1 or 2, subject to tech feasibility) so users get a working default instead of an empty state.',
+                    visuals: [
+                        {
+                            image: '/projects/semantic-grouping/enh-1-enable-card.png',
+                            caption:
+                                '"Use semantic grouping" — a single card with a NEW pill, a plain-English one-liner, and an Active toggle. Enabling it auto-selects Semantic grouping on the highest-signal long-text variable(s).',
+                        },
+                    ],
+                    anatomy: {
+                        intro:
+                            'The card sits above the variables list so it reads as a model-level setting, not a per-row control.',
+                        parts: [
+                            {
+                                title: 'Sparkle icon',
+                                tag: 'New',
+                                description:
+                                    'Signals that this is an AI-powered / intelligent transformation. Uses the same magic-wand mark used across model-generation features.',
+                            },
+                            {
+                                title: '"Use semantic grouping" label',
+                                tag: 'New',
+                                description:
+                                    'Plain-English name that matches the transformation option in the per-variable dropdown below, so users can trace enable → applied.',
+                            },
+                            {
+                                title: 'NEW pill',
+                                tag: 'Existing',
+                                description:
+                                    'Standard SLDS pill used to flag newly released capabilities — reused so it looks like every other new feature in the product.',
+                            },
+                            {
+                                title: 'Info icon',
+                                tag: 'Existing',
+                                description:
+                                    'On hover, explains what "group by meaning" means in one line and points to docs. Uses the standard info-icon pattern.',
+                            },
+                            {
+                                title: 'Description line',
+                                tag: 'New',
+                                description:
+                                    '"Group long text fields by meaning instead of patterns." Names the trade-off in the same sentence so users understand why this exists.',
+                            },
+                            {
+                                title: 'Active toggle',
+                                tag: 'Existing',
+                                description:
+                                    'Standard on/off toggle. Turning it on triggers auto-apply; turning it off clears Semantic grouping from every variable and returns them to None.',
+                            },
+                        ],
+                    },
+                },
+                {
+                    title: 'Long text tag on variables',
+                    priority: 'high',
+                    description:
+                        'A new "Long text" tag next to variable names so users can spot which fields are actually free-form text — the ones Semantic grouping was built for. Without this, long-text variables look identical to short strings in the list.',
+                    visuals: [
+                        {
+                            image: '/projects/semantic-grouping/enh-2-long-text-tag.png',
+                            caption:
+                                'The "Long text" pill sits next to the variable name, before any applied-transformation chip on the right. Makes long-text variables scannable at a glance.',
+                        },
+                    ],
+                    anatomy: {
+                        intro:
+                            'Reuses the existing type-tag pattern used elsewhere in Prepare Variables, so it feels like the same system, just with a new value.',
+                        parts: [
+                            {
+                                title: 'Type icon',
+                                tag: 'Existing',
+                                description:
+                                    'The Aa monogram that already sits next to text-type variables — kept unchanged so the row structure stays consistent.',
+                            },
+                            {
+                                title: 'Variable name',
+                                tag: 'Existing',
+                                description:
+                                    'Clickable link to the variable detail — unchanged.',
+                            },
+                            {
+                                title: '"Long text" pill',
+                                tag: 'New',
+                                description:
+                                    'A neutral-grey pill that marks the variable as long-form free text. Only appears on variables the system classifies as long text — short strings, IDs, and picklist-like fields don\'t get it.',
+                            },
+                            {
+                                title: 'Applied-transformation chip',
+                                tag: 'Existing',
+                                description:
+                                    'The blue "Semantic Grouping" outline chip on the right — shown when the transformation is applied to this variable. Standard pattern reused from Text clustering.',
+                            },
+                            {
+                                title: 'Row delete',
+                                tag: 'Existing',
+                                description:
+                                    'Standard row-level remove control — unchanged.',
+                            },
+                        ],
+                    },
+                },
+                {
+                    title: 'Semantic Grouping in the transformation dropdown',
+                    priority: 'high',
+                    description:
+                        'The per-variable Transformation dropdown now lists Semantic Grouping alongside None. When Semantic grouping is enabled at the model level, it pre-selects on auto-applied variables; users can also switch it on manually for any long-text variable up to the limit.',
+                    visuals: [
+                        {
+                            image: '/projects/semantic-grouping/enh-3-transformation-list.png',
+                            caption:
+                                'Opening the Transformation dropdown on a long-text variable shows Semantic Grouping as a first-class option — same UI pattern as every other per-variable transformation.',
+                        },
+                    ],
+                    anatomy: {
+                        intro:
+                            'The dropdown itself is unchanged — the new option is just a new item slotted into the existing list, following the same select pattern.',
+                        parts: [
+                            {
+                                title: '"Transformation" label',
+                                tag: 'Existing',
+                                description:
+                                    'Standard field label — unchanged.',
+                            },
+                            {
+                                title: 'Info icon',
+                                tag: 'Existing',
+                                description:
+                                    'Reused help-icon pattern that explains the transformation options in a tooltip.',
+                            },
+                            {
+                                title: 'Select control',
+                                tag: 'Existing',
+                                description:
+                                    'Standard SLDS combobox — unchanged shape, unchanged interaction.',
+                            },
+                            {
+                                title: '"None" option',
+                                tag: 'Existing',
+                                description:
+                                    'Default no-transformation option — kept in the same position at the top of the list.',
+                            },
+                            {
+                                title: '"Semantic Grouping" option',
+                                tag: 'New',
+                                description:
+                                    'New list item — appears only for long-text variables. Selecting it counts against the model-level Semantic grouping limit; if the limit is reached, the option remains visible on selected rows but is disabled on new ones (see enhancement 4).',
+                            },
+                        ],
+                    },
+                },
+                {
+                    title: 'Limit-reached state on extra long-text variables',
+                    priority: 'medium',
+                    description:
+                        'When Semantic grouping has already been applied to the maximum number of variables, remaining long-text rows are disabled with a "Limit reached" chip and an info icon that explains why in a tooltip — so users understand what changed and how to fix it.',
+                    visuals: [
+                        {
+                            image: '/projects/semantic-grouping/enh-4-limit-reached.png',
+                            caption:
+                                'A disabled long-text row: the checkbox is greyed out, and a "Limit reached" chip with an info icon replaces the applied-transformation chip on the right.',
+                        },
+                        {
+                            image: '/projects/semantic-grouping/enh-4-limit-tooltip.png',
+                            caption:
+                                'Hovering the info icon reveals the reason: "Only 2 fields can use Semantic Grouping. Remove one to enable this variable." Names the constraint and the recovery action in one sentence.',
+                        },
+                    ],
+                    anatomy: {
+                        intro:
+                            'A soft-blocked state rather than a hard error — the row still shows the variable and its type so users can decide whether to swap this one in.',
+                        parts: [
+                            {
+                                title: 'Disabled checkbox',
+                                tag: 'Existing',
+                                description:
+                                    'Standard disabled-checkbox state — signals that the row can\'t be included in the current model config.',
+                            },
+                            {
+                                title: 'Muted variable name',
+                                tag: 'Existing',
+                                description:
+                                    'Name text uses the disabled colour token so the whole row reads as inactive at a glance.',
+                            },
+                            {
+                                title: '"Long text" pill',
+                                tag: 'New',
+                                description:
+                                    'Still shown so users know this variable is a candidate — the tag doesn\'t disappear just because the row is disabled.',
+                            },
+                            {
+                                title: '"Limit reached" chip',
+                                tag: 'New',
+                                description:
+                                    'Italic label with an inline info icon. Replaces the applied-transformation chip on rows that hit the cap. Compact enough to sit in the existing column without a layout change.',
+                            },
+                            {
+                                title: 'Tooltip on info icon',
+                                tag: 'New',
+                                description:
+                                    'Dark tooltip pinned above the icon. Explains the fixed limit and the exact action needed to recover — "Remove one to enable this variable."',
+                            },
+                        ],
+                    },
+                },
+                {
+                    title: 'Applied-transformation counter chip',
+                    priority: 'medium',
+                    description:
+                        'A small chip above the variables list that shows how many Semantic groupings are currently applied against the cap — "Semantic transformations · 2 of 2". A single at-a-glance indicator that tells users the model-level state so they don\'t have to scan the list to work out why new rows are getting soft-blocked.',
+                    visuals: [
+                        {
+                            image: '/projects/semantic-grouping/enh-4-counter-chip.png',
+                            caption:
+                                'The counter chip: type icon + label + separator + count. Same shape across all states — the count is the only thing that changes as users add or remove Semantic Grouping from variables.',
+                        },
+                    ],
+                    anatomy: {
+                        intro:
+                            'Reuses the type-tag chip shape used elsewhere in Prepare Variables. Placed near the enable card / list header so it reads as a model-level summary, not a per-row signal.',
+                        parts: [
+                            {
+                                title: 'Type icon',
+                                tag: 'Existing',
+                                description:
+                                    'The Aa monogram used on long-text variables — anchors the chip visually to the class of fields it counts.',
+                            },
+                            {
+                                title: '"Semantic transformations" label',
+                                tag: 'New',
+                                description:
+                                    'Plain-English label naming what\'s being counted. Uses "transformations" (matching the dropdown label) rather than "groupings" so the vocabulary stays consistent across the flow.',
+                            },
+                            {
+                                title: 'Middle-dot separator',
+                                tag: 'Existing',
+                                description:
+                                    'Standard bullet separator used across the product to divide label + value inside a single chip.',
+                            },
+                            {
+                                title: 'Usage count',
+                                tag: 'New',
+                                description:
+                                    'The "X of Y" pair. X increments each time a user selects Semantic Grouping on a variable; Y is the fixed model-level cap. The chip stays visible in every state — 0 of 2, 1 of 2, 2 of 2 — so users always know where they are relative to the limit.',
+                            },
+                        ],
+                    },
+                },
+            ],
+            impact: {
+                summary:
+                    'Together, these five changes make long-text variables usable in Cluster Builder for the first time — users get a working Semantic grouping default on the highest-signal fields, a clear signal of which variables qualify, a visible usage counter, and a soft-blocked state that names the constraint instead of failing silently.',
+                metrics: [
+                    {
+                        label: 'Long-text variables usable in a cluster model',
+                        before: '0 — Text clustering fails on free-form fields',
+                        after: 'Up to the Semantic grouping cap',
+                    },
+                    {
+                        label: 'Setup for the default happy path',
+                        before: 'User picks the right transformation per variable',
+                        after: 'One toggle auto-applies to the top variable(s)',
+                    },
+                    {
+                        label: 'Understanding why a variable is disabled',
+                        before: 'Silently skipped or unclear',
+                        after: '"Limit reached" chip + one-line explainer tooltip',
+                    },
+                ],
+                categories: [
+                    {
+                        title: 'New capability',
+                        description:
+                            'Semantic grouping unlocks long-text variables that were previously incompatible with Cluster Builder — a whole class of fields (descriptions, notes, logs, feedback) becomes usable in a cluster model.',
+                    },
+                    {
+                        title: 'Faster time-to-first-result',
+                        description:
+                            'The auto-apply behaviour on the enable card means users don\'t have to reason about which of their long-text variables is the best candidate — the system picks a working default they can override.',
+                    },
+                    {
+                        title: 'Constraint clarity',
+                        description:
+                            'The "Limit reached" state names the cap and the recovery action in the same tooltip, so users don\'t have to guess why a row is disabled or where to change it.',
+                    },
+                ],
+            },
+        },
         flows: [
             {
                 id: 'semantic-clustering-prep',

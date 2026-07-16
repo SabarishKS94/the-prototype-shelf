@@ -151,7 +151,6 @@ export default class DemoLauncher extends LightningElement {
                     ...f,
                     indexLabel: String(flowCounter).padStart(2, '0'),
                     guidedUrl,
-                    absoluteGuidedUrl: guidedUrl,
                     localGuidedUrl,
                     hasLocalEntry: Boolean(localGuidedUrl),
                     statusLabel: this._statusLabel(status),
@@ -229,24 +228,4 @@ export default class DemoLauncher extends LightningElement {
         }
     }
 
-    handleCopy = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        const btn = event.currentTarget;
-        const url = btn.dataset.url;
-        if (!url) return;
-        navigator.clipboard?.writeText(url).then(
-            () => {
-                btn.classList.add('is-copied');
-                btn.setAttribute('aria-label', 'Link copied');
-                setTimeout(() => {
-                    btn.classList.remove('is-copied');
-                    btn.setAttribute('aria-label', 'Copy demo link');
-                }, 1500);
-            },
-            () => {
-                /* clipboard unavailable — silent */
-            }
-        );
-    };
 }

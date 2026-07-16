@@ -26,6 +26,10 @@ export default class ProjectDetail extends LightningElement {
         return this.project?.detail?.subtitle ?? this.project?.summary ?? '';
     }
 
+    get pageTitle() {
+        return this.project?.detail?.title ?? this.project?.name ?? '';
+    }
+
     get tabs() {
         const detail = this.project?.detail;
         if (!detail) return [];
@@ -159,6 +163,25 @@ export default class ProjectDetail extends LightningElement {
 
     get projectStatusClass() {
         return `status status_${this.project?.status ?? 'iterating'}`;
+    }
+
+    get sourceUrl() {
+        return this.project?.sourceUrl ?? '';
+    }
+
+    get hasSourceUrl() {
+        return Boolean(this.sourceUrl);
+    }
+
+    get sourceRepoLabel() {
+        if (!this.sourceUrl) return '';
+        try {
+            const u = new URL(this.sourceUrl);
+            const path = u.pathname.replace(/^\/+|\/+$/g, '');
+            return path || u.hostname;
+        } catch {
+            return this.sourceUrl;
+        }
     }
 
     connectedCallback() {
