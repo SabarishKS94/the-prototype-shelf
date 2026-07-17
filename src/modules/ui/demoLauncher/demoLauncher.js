@@ -151,6 +151,7 @@ export default class DemoLauncher extends LightningElement {
                     ...f,
                     indexLabel: String(flowCounter).padStart(2, '0'),
                     guidedUrl,
+                    liveUrl: f.entry,
                     localGuidedUrl,
                     hasLocalEntry: Boolean(localGuidedUrl),
                     statusLabel: this._statusLabel(status),

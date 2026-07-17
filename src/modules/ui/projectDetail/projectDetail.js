@@ -73,6 +73,7 @@ export default class ProjectDetail extends LightningElement {
                 ...f,
                 indexLabel: String(i + 1).padStart(2, '0'),
                 guidedUrl,
+                liveUrl: f.entry,
                 statusLabel: this._statusLabel(status),
                 statusClass: `status status_${status}`,
             };
@@ -86,6 +87,10 @@ export default class ProjectDetail extends LightningElement {
     get enhancements() {
         const items = this.project?.detail?.enhancements ?? [];
         return items.map((e, i) => {
+            const priorityRaw = String(e.priority ?? '').trim().toLowerCase();
+            const priorityLabel = priorityRaw
+                ? priorityRaw.charAt(0).toUpperCase() + priorityRaw.slice(1)
+                : '';
             const visuals = Array.isArray(e.visuals) && e.visuals.length
                 ? e.visuals
                 : this._legacyBeforeAfter(e);
@@ -104,8 +109,11 @@ export default class ProjectDetail extends LightningElement {
                 : null;
             return {
                 ...e,
+                priority: priorityLabel,
                 indexLabel: `Enhancement · Priority ${i + 1}`,
-                priorityClass: `priority priority_${(e.priority ?? '').toLowerCase()}`,
+                priorityClass: priorityRaw
+                    ? `priority priority_${priorityRaw}`
+                    : 'priority',
                 hasAnatomy: Boolean(anatomy && anatomy.parts.length),
                 anatomy,
                 visuals: visuals.map((v, vi) => ({

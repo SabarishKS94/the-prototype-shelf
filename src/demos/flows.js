@@ -55,6 +55,15 @@ export const projects = [
             'Prototype variants for surfacing predictive AI attributes inside the Data Cloud segment builder — from grouped panels to natural-language prompts.',
         status: 'in-review',
         lastUpdated: '2026-07-11',
+        sourceUrl: 'https://git.soma.salesforce.com/sabarish-ks/ai-models-in-segments',
+        detail: {
+            subtitle:
+                'A design exploration for bringing predictive AI attributes — churn risk, lifetime value, product affinity — into the Data Cloud segment builder. Tests how marketers should discover, evaluate, and combine ML-powered fields alongside standard attributes when building an audience.',
+            walkthrough: {
+                intro:
+                    'The prototype opens on the Data Cloud segment builder with predictive AI attributes surfaced alongside standard fields. Explore how marketers discover, evaluate, and combine ML-powered attributes when building an audience.',
+            },
+        },
         flows: [
             {
                 id: 'ai-models-in-segments',
@@ -62,7 +71,7 @@ export const projects = [
                 description:
                     'A design exploration for bringing predictive AI attributes — like churn risk, lifetime value, and product affinity — into the Data Cloud segment builder. The prototype tests how marketers should discover, evaluate, and combine ML-powered fields alongside standard attributes when building an audience.',
                 status: 'in-review',
-                entry: 'https://sabarishks94.github.io/ai-models-in-segments/#/app/segment-builder',
+                entry: 'https://git.soma.salesforce.com/pages/sabarish-ks/ai-models-in-segments/#/app/segment-builder',
             },
         ],
     },
@@ -72,6 +81,7 @@ export const projects = [
         summary: 'AI Models NBA card, stages, and settings.',
         status: 'iterating',
         lastUpdated: '2026-06-20',
+        sourceUrl: 'https://git.soma.salesforce.com/sabarish-ks/next-best-action-nba',
         detail: {
             subtitle:
                 'Bringing Next Best Action into the AI Models experience — from onboarding, through training and activation, all the way to feature-manager settings.',
@@ -179,7 +189,7 @@ export const projects = [
                 description:
                     'Cycle through every NBA card state — training, activation, inference setup, execution, monitoring — using the state picker in the prototype toolbar. Everything else on the page is locked so the focus stays on the card itself.',
                 status: 'delivered',
-                entry: 'https://sabarishks94.github.io/next-best-action-nba/#/app/nba-model-detail',
+                entry: 'https://git.soma.salesforce.com/pages/sabarish-ks/next-best-action-nba/#/app/nba-model-detail',
                 localEntry: 'http://localhost:4363/app/nba-model-detail',
             },
             {
@@ -188,7 +198,7 @@ export const projects = [
                 description:
                     'Two onboarding paths side by side. Silent auto-enable drops the user straight into the just-enabled card with a kebab menu for refresh/disable. Auto-enable-with-consent surfaces a Continue/Disable pair, opens a terms modal, and only then reveals the training-in-progress card. Toggle between them from the toolbar.',
                 status: 'in-review',
-                entry: 'https://sabarishks94.github.io/next-best-action-nba/#/app/nba-model-detail',
+                entry: 'https://git.soma.salesforce.com/pages/sabarish-ks/next-best-action-nba/#/app/nba-model-detail',
                 localEntry: 'http://localhost:4363/app/nba-model-detail',
             },
             {
@@ -197,7 +207,7 @@ export const projects = [
                 description:
                     'Where NBA and Drift Tracking live on the model\'s Settings tab: feature cards, expandable previews, and the callout that hands off to the org-level Feature Manager. Toggle the previews on and off from the toolbar; both the callout link and the Feature Manager nav item route to the same destination.',
                 status: 'in-review',
-                entry: 'https://sabarishks94.github.io/next-best-action-nba/?tab=settings#/app/nba-model-detail',
+                entry: 'https://git.soma.salesforce.com/pages/sabarish-ks/next-best-action-nba/?tab=settings#/app/nba-model-detail',
                 localEntry: 'http://localhost:4363/app/nba-model-detail?tab=settings',
             },
         ],
@@ -209,6 +219,15 @@ export const projects = [
             'Post-training review flow for cluster models — comparing quality, structure, and operational metrics across versions to decide which one to activate.',
         status: 'in-review',
         lastUpdated: '2026-07-08',
+        sourceUrl: 'https://git.soma.salesforce.com/sabarish-ks/eou-version-comparison',
+        detail: {
+            subtitle:
+                'A post-training review flow for cluster models. Reviewers compare up to three trained versions side by side — overall score, quality & confidence, structure & coverage, operational cost, and label + SHAP distributions — with a recommended winner at the top so activation is a confident call.',
+            walkthrough: {
+                intro:
+                    'Open the comparison view to see all three trained versions in one pass. The recommended winner is called out at the top; every other section — metrics, structure, cost, distributions — supports or challenges that recommendation.',
+            },
+        },
         flows: [
             {
                 id: 'compare-model-versions',
@@ -216,7 +235,7 @@ export const projects = [
                 description:
                     'A side-by-side comparison of up to three trained cluster model versions. Surfaces overall score, quality & confidence metrics, structure & coverage, operational cost, and label + SHAP distributions — with a recommended winner called out at the top so reviewers can activate with confidence.',
                 status: 'in-review',
-                entry: 'https://sabarishks94.github.io/eou-version-comparison/',
+                entry: 'https://git.soma.salesforce.com/pages/sabarish-ks/eou-version-comparison/#/compare-versions',
             },
         ],
     },
@@ -228,7 +247,7 @@ export const projects = [
         status: 'in-review',
         lastUpdated: '2026-07-08',
         sourceUrl:
-            'https://github.com/SabarishKS94/model-builder-flow-settings-interaction',
+            'https://git.soma.salesforce.com/sabarish-ks/model-builder-flow-settings-interaction',
         detail: {
             subtitle:
                 'A refresh of the Prepare Variables step in the Cluster Builder. The settings panel opens by default with the first variable selected, adds a searchable variable selector at the top, and shows a type-specific sample outcome so users understand each transformation before applying it.',
@@ -437,7 +456,7 @@ export const projects = [
                 description:
                     'A right-panel pattern for exposing transformation settings on Step 3 of the Cluster Builder, with an inline preview showing how each transformation will reshape the variable before training.',
                 status: 'in-review',
-                entry: 'https://sabarishks94.github.io/model-builder-flow-settings-interaction/#/app/aim-cluster/builder?mode=shelf&step=3',
+                entry: 'https://git.soma.salesforce.com/pages/sabarish-ks/model-builder-flow-settings-interaction/#/app/aim-cluster/builder?mode=shelf&step=3',
             },
         ],
     },
@@ -448,6 +467,15 @@ export const projects = [
             'A redesigned in-flight state for cluster model training — surfacing pipeline stage, start time, and expected finish so users can leave the page with confidence.',
         status: 'in-review',
         lastUpdated: '2026-07-08',
+        sourceUrl: 'https://git.soma.salesforce.com/sabarish-ks/model-builder-flow-starter-training-in-progress-screen',
+        detail: {
+            subtitle:
+                'A redesigned in-flight state for cluster model training. Turns the empty "training…" screen into a clear status view — showing which stage the pipeline is in, when it started, and when it should finish — so users can leave the page and come back without losing context.',
+            walkthrough: {
+                intro:
+                    'The prototype opens on the training-in-progress state, mid-pipeline. Note the current stage, start time, and expected finish — a status view users can trust enough to walk away from.',
+            },
+        },
         flows: [
             {
                 id: 'training-in-progress',
@@ -455,7 +483,7 @@ export const projects = [
                 description:
                     'A redesigned in-flight state for cluster model training. Turns the empty "training…" screen into a clear status view — showing which stage the pipeline is in, when it started, and when it should finish — so users can leave the page with confidence instead of hovering over a spinner.',
                 status: 'in-review',
-                entry: 'https://sabarishks94.github.io/model-builder-flow-starter-training-in-progress-screen/',
+                entry: 'https://git.soma.salesforce.com/pages/sabarish-ks/model-builder-flow-starter-training-in-progress-screen/#/nba-model-detail',
             },
         ],
     },
@@ -467,7 +495,7 @@ export const projects = [
         status: 'in-review',
         lastUpdated: '2026-07-16',
         sourceUrl:
-            'https://github.com/SabarishKS94/model-builder-flow-semantic-clustering',
+            'https://git.soma.salesforce.com/sabarish-ks/model-builder-flow-semantic-clustering',
         detail: {
             subtitle:
                 'A new transformation for long-text variables on the Prepare Variables step. Text clustering breaks down on free-form fields like descriptions or notes because it matches on exact patterns — Semantic grouping folds near-duplicates and paraphrases into the same group by understanding meaning, so long-text variables become usable in a cluster model.',
@@ -773,7 +801,7 @@ export const projects = [
                 description:
                     'A new grouping approach for the Prepare Variables step that groups records by meaning instead of exact text — so near-duplicates and paraphrases fold into the same group. This prototype explores how it should surface alongside the existing Text clustering option.',
                 status: 'in-review',
-                entry: 'https://sabarishks94.github.io/model-builder-flow-semantic-clustering/#/app/aim-cluster/builder?step=3&mode=shelf',
+                entry: 'https://git.soma.salesforce.com/pages/sabarish-ks/model-builder-flow-semantic-clustering/#/app/aim-cluster/builder?step=3&mode=shelf',
             },
         ],
     },
