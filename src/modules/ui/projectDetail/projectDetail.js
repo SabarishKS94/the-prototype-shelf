@@ -76,7 +76,59 @@ export default class ProjectDetail extends LightningElement {
                 liveUrl: f.entry,
                 statusLabel: this._statusLabel(status),
                 statusClass: `status status_${status}`,
+                feedbackUrl: this._flowFeedbackUrl(f),
+                hasFeedback: Boolean(this.sourceUrl),
             };
+        });
+    }
+
+    _newIssueUrl({ title, body, labels }) {
+        if (!this.sourceUrl) return '';
+        const base = this.sourceUrl.replace(/\/+$/, '');
+        const params = new URLSearchParams();
+        if (title) params.set('title', title);
+        if (body) params.set('body', body);
+        if (labels && labels.length) params.set('labels', labels.join(','));
+        return `${base}/issues/new?${params.toString()}`;
+    }
+
+    _flowFeedbackUrl(flow) {
+        const projectName = this.project?.name ?? '';
+        const flowTitle = flow?.title ?? '';
+        const body = [
+            `**Project:** ${projectName}`,
+            `**Flow:** ${flowTitle}`,
+            `**Prototype:** ${flow?.entry ?? ''}`,
+            '',
+            '### What did you notice?',
+            '',
+            '### What would you change?',
+            '',
+        ].join('\n');
+        return this._newIssueUrl({
+            title: `[Feedback] ${projectName} — ${flowTitle}`,
+            body,
+            labels: ['feedback', 'prototype'],
+        });
+    }
+
+    _enhancementFeedbackUrl(e) {
+        const projectName = this.project?.name ?? '';
+        const title = e?.title ?? '';
+        const body = [
+            `**Project:** ${projectName}`,
+            `**Enhancement:** ${title}`,
+            `**Priority:** ${e?.priority ?? ''}`,
+            '',
+            '### Is this the right change?',
+            '',
+            '### What would you refine, add, or drop?',
+            '',
+        ].join('\n');
+        return this._newIssueUrl({
+            title: `[Enhancement review] ${projectName} — ${title}`,
+            body,
+            labels: ['feedback', 'enhancement-review'],
         });
     }
 
@@ -107,7 +159,7 @@ export default class ProjectDetail extends LightningElement {
                       })),
                   }
                 : null;
-            return {
+            const mapped = {
                 ...e,
                 priority: priorityLabel,
                 indexLabel: `Enhancement · Priority ${i + 1}`,
@@ -122,6 +174,9 @@ export default class ProjectDetail extends LightningElement {
                     _key: `${i}-${vi}`,
                 })),
             };
+            mapped.feedbackUrl = this._enhancementFeedbackUrl(mapped);
+            mapped.hasFeedback = Boolean(this.sourceUrl);
+            return mapped;
         });
     }
 
