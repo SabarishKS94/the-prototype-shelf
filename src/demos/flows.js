@@ -456,7 +456,7 @@ export const projects = [
                 description:
                     'A right-panel pattern for exposing transformation settings on Step 3 of the Cluster Builder, with an inline preview showing how each transformation will reshape the variable before training.',
                 status: 'in-review',
-                entry: 'https://git.soma.salesforce.com/pages/sabarish-ks/model-builder-flow-settings-interaction/#/app/aim-cluster/builder?mode=shelf&step=3',
+                entry: 'https://git.soma.salesforce.com/pages/sabarish-ks/model-builder-flow-settings-interaction/#/app/aim-cluster/builder?mode=shelf&step=3&variant=g',
             },
         ],
     },
