@@ -96,13 +96,17 @@ export default class ProjectDetail extends LightningElement {
         const projectName = this.project?.name ?? '';
         const flowTitle = flow?.title ?? '';
         const body = [
-            `**Project:** ${projectName}`,
-            `**Flow:** ${flowTitle}`,
+            `**Project:** ${projectName}  `,
+            `**Flow:** ${flowTitle}  `,
             `**Prototype:** ${flow?.entry ?? ''}`,
+            '',
+            '---',
             '',
             '### What did you notice?',
             '',
+            '',
             '### What would you change?',
+            '',
             '',
         ].join('\n');
         return this._newIssueUrl({
@@ -116,13 +120,17 @@ export default class ProjectDetail extends LightningElement {
         const projectName = this.project?.name ?? '';
         const title = e?.title ?? '';
         const body = [
-            `**Project:** ${projectName}`,
-            `**Enhancement:** ${title}`,
+            `**Project:** ${projectName}  `,
+            `**Enhancement:** ${title}  `,
             `**Priority:** ${e?.priority ?? ''}`,
+            '',
+            '---',
             '',
             '### Is this the right change?',
             '',
+            '',
             '### What would you refine, add, or drop?',
+            '',
             '',
         ].join('\n');
         return this._newIssueUrl({
